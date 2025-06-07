@@ -70,7 +70,7 @@ const Login = () => {
 
         {error && <p>{error}</p>}
 
-        <button type='submit'>Sign In</button>
+        <button type='submit' className='btn-primary'>Sign In</button>
 
         <p>Don't have an account yet? <Link to="/register">Sign Up</Link></p>
       </form>

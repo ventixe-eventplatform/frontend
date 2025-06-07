@@ -121,6 +121,9 @@ h3 {
 .mt-2 {
   margin-top: 2rem;
 }
+.mb-1 {
+  margin-bottom: 1rem;
+}
 .mb-2 {
   margin-bottom: 2rem;
 }
@@ -569,29 +572,37 @@ form {
   margin: 2rem 0;
 }
 
-.ticket-table {
-  display: flex;
-  flex-direction: column;
-  margin: 2rem 0;
+.ticket-table table {
+  width: 100%;
+  border-collapse: collapse;
 }
-.ticket-table tbody {
-  display: flex;
-  flex-direction: column;
-  margin: 2rem 0;
-  gap: 1rem;
+.ticket-table table tbody, .ticket-table table thead {
+  display: contents;
 }
 
-.ticket-table tr {
+.ticket-table table tr {
   background-color: var(--grey-10);
-  cursor: pointer;
+  display: grid;
+  align-items: center;
+  width: 100%;
   border-radius: 1rem;
-}
-
-.ticket-table td {
   padding: 1rem;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr;
+  margin: .7rem 0;
 }
 
-tr {
+.ticket-table table tbody tr {
+  cursor: pointer;
+  transition: background-color .2s ease-in-out;
+
+  &:hover {
+    background-color: var(--primary-40);
+  }
+}
+
+.ticket-table table th {
+  width: 100%;
+  padding: 0 1rem;
   text-align: left;
 }
 

@@ -9,7 +9,6 @@ const Tickets = () => {
 
   const getBookings = async () => {
     const customerId = user.userId
-    console.log(customerId)
     try {
       const token = localStorage.getItem("token")
       const bookingBaseUrl = import.meta.env.VITE_BOOKINGSERVICE_BASEURL;
@@ -30,13 +29,15 @@ const Tickets = () => {
     getBookings()
   }, [user.userId])
 
-  const navigateToDetails = () => {
-    navigate("/ticketDetails")
+  const navigateToDetails = (ticket, booking) => {
+    navigate("/ticketDetails", {
+      state: { ticket, eventId: booking.eventId}
+    })
   }
 
   return (
     <div> 
-      <h3>Your Tickets</h3>
+      <h3 className='pl-1 mb-1'>Your Tickets</h3>
       <div className='ticket-table'>
         <table>
           <thead>
@@ -54,8 +55,8 @@ const Tickets = () => {
           {
             bookings.map(booking => {
               return booking.tickets.map((ticket, i) => (
-                <tr key={`${booking.bookingId}-${i}`} onClick={navigateToDetails}>
-                  <td>{booking.bookingDate}</td>
+                <tr key={`${booking.bookingId}-${i}`} onClick={() => navigateToDetails(ticket, booking)}>
+                  <td>{new Date(booking.bookingDate).toLocaleDateString([], { year: '2-digit', month: '2-digit', day: '2-digit' })}</td>
                   <td>{ticket.holderFirstName} {ticket.holderLastName}</td>
                   <td>{booking.eventName}</td>
                   <td>{ticket.type}</td>

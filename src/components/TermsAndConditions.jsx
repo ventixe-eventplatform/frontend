@@ -28,7 +28,7 @@ const TermsAndConditions = () => {
   return (
     <div className='wrapper terms-wrapper'>
       <h3 className='mt-1 pl-1'>Terms & Conditions</h3>
-      {loading && <p>Loading...</p>}
+      {loading && <p className='pl-1'>Loading...</p>}
       <ol className='terms-list'>
         {
           terms.map(term => (
