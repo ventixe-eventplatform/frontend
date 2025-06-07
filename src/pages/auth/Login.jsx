@@ -21,7 +21,7 @@ const Login = () => {
 
     try {
       // const authBaseUrl = import.meta.env.VITE_AUTHSERVICE_BASEURL;
-      const res = await fetch(`/auth/signin`, {
+      const res = await fetch('/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -46,8 +46,8 @@ const Login = () => {
   }
 
   const profileExists = async (userId) => {
-    const accountProfileBaseUrl = import.meta.env.VITE_ACCOUNTPROFILESERVICE_BASEURL;
-    const res = await fetch(`${accountProfileBaseUrl}/api/accountProfiles/exists`, {
+    // const accountProfileBaseUrl = import.meta.env.VITE_ACCOUNTPROFILESERVICE_BASEURL;
+    const res = await fetch('/accountProfiles/exists', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({id: userId})
