@@ -13,18 +13,13 @@
   "routes": [
     {
       "route": "/auth/*",
-      "method": "POST",
-      "forward": "https://ventixe-app-authservice.azurewebsites.net/api/auth/*"
-    },
-    {
-      "route": "/auth/*",
-      "method": "OPTIONS",
+      "methods": ["POST", "OPTIONS"],
       "forward": "https://ventixe-app-authservice.azurewebsites.net/api/auth/*"
     },
     {
       "route": "/accounts/*",
       "method": "POST",
-      "forward": "https://ventixe-app-accountservice.azurewebsites.net/api/accounts/*",
+      "forward": "https://ventixe-app-accountservice.azurewebsites.net/api/accounts/*"
     }
   ]
 }
