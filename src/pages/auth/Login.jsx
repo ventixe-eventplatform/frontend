@@ -21,6 +21,8 @@ const Login = () => {
 
     try {
       const authBaseUrl = import.meta.env.VITE_AUTHSERVICE_BASEURL;
+      console.log("Base URL: ", authBaseUrl)
+      
       const res = await fetch(`${authBaseUrl}/api/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -46,7 +48,7 @@ const Login = () => {
   }
 
   const profileExists = async (userId) => {
-    // const accountProfileBaseUrl = import.meta.env.VITE_ACCOUNTPROFILESERVICE_BASEURL;
+    const accountProfileBaseUrl = import.meta.env.VITE_ACCOUNTPROFILESERVICE_BASEURL;
     const res = await fetch('/accountProfiles/exists', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
