@@ -49,7 +49,7 @@ const Login = () => {
 
   const profileExists = async (userId) => {
     const accountProfileBaseUrl = import.meta.env.VITE_ACCOUNTPROFILESERVICE_BASEURL;
-    const res = await fetch('/accountProfiles/exists', {
+    const res = await fetch(`${accountProfileBaseUrl}/api/accountProfiles/exists`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({id: userId})
