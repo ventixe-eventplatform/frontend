@@ -32,7 +32,15 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "dist" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-
+        env:
+          VITE_AUTHSERVICE_BASEURL: ${{ secrets.VITE_AUTHSERVICE_BASEURL }}
+          VITE_ACCOUNTPROFILESERVICE_BASEURL: ${{ secrets.VITE_ACCOUNTPROFILESERVICE_BASEURL }}
+          VITE_BOOKINGSERVICE_BASEURL: ${{ secrets.VITE_BOOKINGSERVICE_BASEURL }}
+          VITE_EVENTSERVICE_BASEURL: ${{ secrets.VITE_EVENTSERVICE_BASEURL }}
+          VITE_RESTRICTIONSERVICE_BASEURL: ${{ secrets.VITE_RESTRICTIONSERVICE_BASEURL }}
+          VITE_TERMSSERVICE_BASEURL: ${{ secrets.VITE_TERMSSERVICE_BASEURL }}
+          VITE_VERIFICATIONSERVICE_BASEURL: ${{ secrets.VITE_VERIFICATIONSERVICE_BASEURL }}
+          
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
