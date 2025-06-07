@@ -9,5 +9,12 @@
       "/css/*",
       "/js/*"
     ]
-  }
+  },
+  "routes": [
+    {
+      "route": "/auth/*",
+      "rewrite": "https://ventixe-app-authservice.azurewebsites.net/api/:*",
+      "allowedRoles": ["anonymous"]
+    }
+  ]
 }
