@@ -9,17 +9,5 @@
       "/css/*",
       "/js/*"
     ]
-  },
-  "routes": [
-    {
-      "route": "/auth/*",
-      "methods": ["POST", "OPTIONS"],
-      "forward": "https://ventixe-app-authservice.azurewebsites.net/api/auth/*"
-    },
-    {
-      "route": "/accounts/*",
-      "method": "POST",
-      "forward": "https://ventixe-app-accountservice.azurewebsites.net/api/accounts/*"
-    }
-  ]
+  }
 }
