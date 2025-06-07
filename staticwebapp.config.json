@@ -13,13 +13,13 @@
   "routes": [
     {
       "route": "/auth/*",
-      "rewrite": "https://ventixe-app-authservice.azurewebsites.net/api/auth/*",
-      "allowedRoles": ["anonymous"]
+      "methods": ["POST", "OPTIONS"],
+      "forward": "https://ventixe-app-authservice.azurewebsites.net/api/auth/*"
     },
-        {
+    {
       "route": "/accounts/*",
-      "rewrite": "https://ventixe-app-accountservice.azurewebsites.net/api/accounts/*",
-      "allowedRoles": ["anonymous"]
+      "method": "POST",
+      "forward": "https://ventixe-app-accountservice.azurewebsites.net/api/accounts/*"
     }
   ]
 }
