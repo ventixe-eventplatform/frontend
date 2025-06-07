@@ -13,18 +13,18 @@
   "routes": [
     {
       "route": "/auth/*",
-      "rewrite": "https://ventixe-app-authservice.azurewebsites.net/api/auth/:*",
-      "allowedRoles": ["anonymous"]
+      "method": "POST",
+      "forward": "https://ventixe-app-authservice.azurewebsites.net/api/auth/*"
     },
-        {
+    {
+      "route": "/auth/*",
+      "method": "OPTIONS",
+      "forward": "https://ventixe-app-authservice.azurewebsites.net/api/auth/*"
+    },
+    {
       "route": "/accounts/*",
-      "rewrite": "https://ventixe-app-accountservice.azurewebsites.net/api/accounts/:*",
-      "allowedRoles": ["anonymous"]
-    },
-      {
-      "route": "/accountProfiles/*",
-      "rewrite": "https://ventixe-app-accountprofileservice.azurewebsites.net/api/accountProfiles/:*",
-      "allowedRoles": ["anonymous"]
+      "method": "POST",
+      "forward": "https://ventixe-app-accountservice.azurewebsites.net/api/accounts/*",
     }
   ]
 }
