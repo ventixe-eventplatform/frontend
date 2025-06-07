@@ -20,6 +20,11 @@
       "route": "/accounts/*",
       "rewrite": "https://ventixe-app-accountservice.azurewebsites.net/api/accounts/*",
       "allowedRoles": ["anonymous"]
+    },
+      {
+      "route": "/accountProfiles/*",
+      "rewrite": "https://ventixe-app-accountprofileservice.azurewebsites.net/api/accountProfiles/*",
+      "allowedRoles": ["anonymous"]
     }
   ]
 }
