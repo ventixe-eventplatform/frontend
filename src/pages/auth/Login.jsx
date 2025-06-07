@@ -20,9 +20,8 @@ const Login = () => {
     setError('')
 
     try {
-      const authBaseUrl = import.meta.env.VITE_AUTHSERVICE_BASEURL;
-      console.log("authBaseUrl:", import.meta.env.VITE_AUTHSERVICE_BASEURL)
-      const res = await fetch(`${authBaseUrl}/api/auth/signin`, {
+      // const authBaseUrl = import.meta.env.VITE_AUTHSERVICE_BASEURL;
+      const res = await fetch(`/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
