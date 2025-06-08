@@ -98,7 +98,7 @@ const ConfirmBooking = () => {
       Array.from({ length: pkg.quantity }, () => ({
         holderFirstName: profileFormData.firstName,
         holderLastName: profileFormData.lastName,
-        quantity: pkg.quantity,
+        quantity: 1,
         type: pkg.packageType,
         price: pkg.price
       }))
