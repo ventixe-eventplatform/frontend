@@ -19,8 +19,6 @@ const SelectPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      console.log(JSON.stringify(formData))
-      
       const authBaseUrl = import.meta.env.VITE_AUTHSERVICE_BASEURL;
       const res = await fetch(`${authBaseUrl}/api/auth/register`, {
         method: 'POST',

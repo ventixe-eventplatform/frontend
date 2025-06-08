@@ -20,9 +20,7 @@ const Login = () => {
     setError('')
 
     try {
-      const authBaseUrl = import.meta.env.VITE_AUTHSERVICE_BASEURL;
-      console.log("Base URL: ", authBaseUrl)
-      
+      const authBaseUrl = import.meta.env.VITE_AUTHSERVICE_BASEURL;      
       const res = await fetch(`${authBaseUrl}/api/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -39,7 +37,7 @@ const Login = () => {
         const exists = await profileExists(data.userId)
         navigate(exists ? "/events" : "/completeProfileInfo")
       } else {
-        setError(data.error || 'Login failed.')
+        setError('Login failed')
       }
     } catch (err) {
       console.log("Login error: ", err)
@@ -60,7 +58,7 @@ const Login = () => {
 
   return (
     <div>
-      <h2 className='center'>Sign in to Ventixe</h2>
+      <h2 className='center mb-1'>Sign in to Ventixe</h2>
       <form onSubmit={handleSubmit}>
         <label>Enter your email address</label>
         <input className='form-input' type='email' name='email' value={formData.email} onChange={handleChange} required />
@@ -68,11 +66,11 @@ const Login = () => {
         <label>Enter your password</label>
         <input className='form-input' type='password' name='password' value={formData.password} onChange={handleChange} required />
 
-        {error && <p>{error}</p>}
+        {error && <p className='mb-05'>{error}</p>}
 
         <button type='submit' className='btn-primary'>Sign In</button>
 
-        <p>Don't have an account yet? <Link to="/register">Sign Up</Link></p>
+        <p className='mt-05'>Don't have an account yet? <Link to="/register">Sign Up</Link></p>
       </form>
     </div>
 

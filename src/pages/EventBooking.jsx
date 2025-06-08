@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
-import { Outlet, useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import TermsAndConditions from '../components/TermsAndConditions'
 import EventDetails from '../components/EventDetails'
 import EventPackages from '../components/EventPackages'
 
 const EventBooking = () => {
-
   const [event, setEvent] = useState({})
   const { id } = useParams()
-
 
   const getEvent = async () => {
     const eventBaseUrl = import.meta.env.VITE_EVENTSERVICE_BASEURL;

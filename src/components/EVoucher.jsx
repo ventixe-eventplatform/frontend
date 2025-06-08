@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-
-const EVoucher = ({data}) => {
-  const { ticket, eventId } = data
+const EVoucher = ({state}) => {
+  const { ticket, eventId } = state
   const [event, setEvent] = useState({})
 
   useEffect(() => {
@@ -25,9 +24,8 @@ const EVoucher = ({data}) => {
     <div className='e-voucher'>
 
       <div className='e-voucher-event-details'>
-        <div>
-          <img>{event?.eventImage}</img>
-          <p>{event.eventName}</p>
+        <div className='e-voucher-event-image'>
+          <img src={event?.eventImage}></img>
         </div>
       </div>
 
@@ -48,6 +46,10 @@ const EVoucher = ({data}) => {
         </div>
 
         <div className='e-voucher-location-info'>
+          <div>
+            <h6>Event Name</h6>
+            <p>{event.eventName}</p>
+          </div>
           <div>
             <h6>Location</h6>
             <p>{event.address?.location}</p>

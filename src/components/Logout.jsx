@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { useUser } from '../contexts/UserContext'
-import { useNavigate } from 'react-router-dom'
 
 export const Logout = () => {
   const { setUser } = useUser()
-  const navigate = useNavigate()
   const [error, setError] = useState('')
 
   const signOut = async () => {
@@ -17,10 +15,8 @@ export const Logout = () => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
-        },
-                
+        },     
       })
-
       if (res.ok) {
         localStorage.removeItem("token")
         localStorage.removeItem("expiresAt")
@@ -36,13 +32,11 @@ export const Logout = () => {
           city: '',
           country: '',
         })
-        
-        navigate("/login")
       } else {
         setError("Could not sign out.")
       }
     } catch {
-
+      setError("An unexpected error occured.")
     }
   }
   

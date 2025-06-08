@@ -8,7 +8,7 @@ const TicketDetails = () => {
   const { state } = useLocation()
   return (
     <div className='ticket-details-wrapper'>
-      <EVoucher data={state}/>
+      <EVoucher state={state}/>
       <TermsAndConditions />
       <Restrictions />
     </div>

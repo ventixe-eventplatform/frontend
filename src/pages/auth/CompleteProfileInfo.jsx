@@ -63,11 +63,10 @@ const CompleteProfileInfo = () => {
           city: formData.city, 
           country: formData.country})
         )
-        navigate("/home")
+        navigate("/events")
       } else {
         setError(data.error || "Failed to save profile information.")
       }
-
     } catch {
       setError("An unexpected error occured.")
     }

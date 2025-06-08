@@ -31,8 +31,6 @@ const EventPackages = ({event}) => {
       }
     })
 
-
-
   return (
     <div className='wrapper packages-wrapper'>
       <h3 className='package-header mt-1'>Packages</h3>
@@ -51,9 +49,6 @@ const EventPackages = ({event}) => {
                 </div>
                 <p className='package-price'>${pkg.price}</p>
               </div>
-
-
-              {/* <input className='form-input' type='number' min="0" onChange={e => handleQuantityChange(pkg.packageId, e.target.value)}/> */}
               <select className='form-select' onChange={e => handleQuantityChange(pkg.packageId, e.target.value)}>
                 {[...Array(20)].map((_, i) => (
                   <option key={i} value={i}>{i}</option>

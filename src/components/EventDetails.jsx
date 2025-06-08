@@ -5,7 +5,7 @@ const EventDetails = ({event}) => {
     <div className='event-details-wrapper'>
       <div className='event-details-card'>
         <div className='event-details-image-container'>
-          <img></img>
+          <img src={event.eventImage}></img>
           <span>{event.eventType}</span>
         </div>
         <div className='event-details-info-container'>

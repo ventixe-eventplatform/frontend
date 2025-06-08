@@ -12,22 +12,7 @@ const ConfirmBooking = () => {
   const [billingSameAsDelivery, setBillingSameAsDelivery] = useState(true)
   const [tokenExpired, setTokenExpired] = useState(false)
   const [tockenChecked, setTockenChecked] = useState(false)
-  // const [profileFormData, setProfileFormData] = useState({
-  //   firstName: user.firstName || '',
-  //   lastName: user.lastName || '',
-  //   email: user.email || '',
-  //   streetName: user.streetName || '',
-  //   streetNumber: user.streetNumber || '',
-  //   postalCode: user.postalCode || '',
-  //   city: user.city || '',
-  //   country: user.country || '',
-  //   billingStreetName: user.streetName || '',
-  //   billingStreetNumber: user.streetNumber || '',
-  //   billingPostalCode: user.postalCode || '',
-  //   billingCity: user.city || '',
-  //   billingCountry: user.country || ''
-  // })
-    const [profileFormData, setProfileFormData] = useState({
+  const [profileFormData, setProfileFormData] = useState({
     firstName: '',
     lastName: '',
     email: user.email || '',
@@ -89,8 +74,6 @@ const ConfirmBooking = () => {
   }
 
 
-
-
   const updatedProfileFormData = {
     userId: user.userId,
     firstName: profileFormData.firstName,
@@ -122,28 +105,59 @@ const ConfirmBooking = () => {
     )
   }
 
+  const copyDeliveryAddress = () => {
+    setProfileFormData(prev => ({
+      ...prev,
+      billingStreetName: prev.streetName,
+      billingStreetNumber: prev.streetNumber,
+      billingPostalCode: prev.postalCode,
+      billingCity: prev.city,
+      billingCountry: prev.country
+    }))
+  }
+  
   const handleChange = (e) => {
-    setProfileFormData(prev => ({...prev, [e.target.name]: e.target.value }))
+    const { name, value } = e.target
+
+    setProfileFormData(prev => {
+      const updated = {...prev, [name]: value }
+
+      if (billingSameAsDelivery) {
+        switch (name) {
+          case 'streetName':
+            updated.billingStreetName = value
+            break;
+
+          case 'streetNumber':
+            updated.billingStreetNumber = value
+            break;
+
+          case 'postalCode':
+            updated.billingPostalCode = value
+            break;
+
+          case 'city':
+            updated.billingCity = value
+            break;
+
+          case 'country':
+            updated.billingCountry = value
+            break;
+
+          default:
+            break;
+        }
+      }
+      return updated;
+    })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
 
-    //validate form
-
     try {
       const token = localStorage.getItem("token")
-      console.log("TOKEN:", token)
-      // const bookingRes = await fetch("https://localhost:7011/api/bookings/create", {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${token}`
-      //    },
-      //   body: JSON.stringify(bookingFormData)
-      // })
-
       const bookingBaseUrl = import.meta.env.VITE_BOOKINGSERVICE_BASEURL;
       const bookingRes = await fetch(`${bookingBaseUrl}/api/bookings/create`, {
         method: 'POST',
@@ -161,24 +175,10 @@ const ConfirmBooking = () => {
         body: JSON.stringify(updatedProfileFormData)
       })
 
-
-      // const profileRes = await fetch("https://localhost:7101/api/accountprofiles/update", {
-      //   method: 'POST',
-      //   headers: {'Content-Type': 'application/json' },
-      //   body: JSON.stringify(updatedProfileFormData)
-      // })
-
-      // if (!bookingRes.ok || !profileRes.ok) {
-      //   setError('Booking failed.')
-      if (!bookingRes.ok) {
-      setError('Booking failed.')}
-
-      if (!profileRes.ok) {
-      setError('Profile update failed.')
-
+      if (!bookingRes.ok || !profileRes.ok) {
+        setError('Booking failed.')
       } else {
         navigate("/bookingConfirmation")
-        console.log("Booking successfull")
       }
     } catch (error) {
       console.error("Error submitting form", error.message)
@@ -230,19 +230,6 @@ const ConfirmBooking = () => {
               </tbody>
             </table>
           </div>
-
-            {/* <div>
-              <ul>
-                {selectedPackages.map((pkg, index) => (
-                  <li key={index}>
-                    <p>Package: {pkg.packageType}</p>
-                    <p>Quantity: {pkg.quantity}</p>
-                    <p>Price: ${pkg.price}</p>
-                  </li>
-                ))}
-              </ul>
-            </div> */}
-
             <div>
               <div>
                 <label>First name</label>
@@ -282,7 +269,7 @@ const ConfirmBooking = () => {
             </div>
 
             <div className='flex'>
-              <input type='checkbox' id='billing-address' checked={billingSameAsDelivery} onChange={(e) => setBillingSameAsDelivery(e.target.checked)}/>
+              <input type='checkbox' id='billing-address' checked={billingSameAsDelivery} onChange={(e) => { setBillingSameAsDelivery(e.target.checked); if (e.target.checked) {copyDeliveryAddress()}}}/>
               <label htmlFor='billing-address'>Billing address is the same as delivery address</label>
             </div>
 

@@ -24,7 +24,6 @@ const TermsAndConditions = () => {
     getTerms()
   }, [])
 
-
   return (
     <div className='wrapper terms-wrapper'>
       <h3 className='mt-1 pl-1'>Terms & Conditions</h3>

@@ -96,7 +96,6 @@
 }
 
 html, body {
-  /* margin: 0; */
   font-size: 16px;
   font-weight: 400;
   font-style: normal;
@@ -121,6 +120,9 @@ h3 {
 .mt-2 {
   margin-top: 2rem;
 }
+.mb-05 {
+  margin-bottom: .5rem;
+}
 .mb-1 {
   margin-bottom: 1rem;
 }
@@ -130,6 +132,10 @@ h3 {
 
 .pl-1 {
   padding-left: 1rem;
+}
+
+.pl-05 {
+  padding-left: .5rem;
 }
 .center {
   text-align: center;
@@ -257,6 +263,10 @@ header {
   padding: 1.5rem;
   display: none;
 
+  h1 {
+    color: var(--secondary-100);
+  }
+
     @media(min-width: 768px) {
       display: block;
   }
@@ -307,29 +317,32 @@ footer {
   display: grid;
   grid-template-rows: 7fr 3fr;
   width: 335px;
-  height: 346px;
+  height: 375px;
   background-color: var(--grey-10);
   padding: 1rem;
   border: none;
   border-radius: 1rem;
-
-  @media(min-width: 768px) {
-    width: 315px;
-  }
-
-  @media(min-width: 1400px) {
-    width: 275px;
-  }
 }
 
 .event-image-container {
   position: relative;
+  width: 100%;
+  height: 100%;
+  height: 270px;
+  margin: 0 auto;
 }
+
+  .event-image-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
 
 .event-image-container p {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
   background-color: var(--grey-20);
   padding: .5rem;
   border: none;
@@ -362,10 +375,12 @@ footer {
   }
 
 .event-booking-wrapper {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
 
   @media(min-width: 1400px) {
+    display: grid;
     grid-template-areas: "event-details packages" "terms packages";
     grid-template-columns: 3fr 2fr;
   }
@@ -393,14 +408,25 @@ footer {
   padding: 1rem;
   border: none;
   border-radius: 1rem;
+  gap: 1rem;
 }
 .event-details-image-container {
   position: relative;
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  margin: 0 auto;
 }
+  .event-details-image-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
   .event-details-image-container span{
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 10px;
     background-color: var(--grey-20);
     color: var(--text-color);
     border: none;
@@ -501,24 +527,43 @@ footer {
 
 .e-voucher {
   display: grid;
-  grid-template-columns: 1.5fr 2fr 1fr;
   background-color: var(--cool-grey-20);
   border-radius: 1rem;
   position: relative;
+  height: 310px;
+
+  @media(min-width: 768px) {
+    grid-template-columns: 1.5fr 2fr 1fr;
+  }
 }
 
 .e-voucher-event-details {
   padding: 1rem;
+  height: 100%;
+  display: none;
+  @media(min-width: 768px) {
+    display: block;
+  }
+}
 
+.e-voucher-event-image img{
+  width: 100%;
+  height: 280px;
+  border-radius: 1rem;
+  object-fit: fill;
 }
 
 .e-voucher-info {
   padding: 1rem;
-  display: grid;
   grid-template-rows: 1fr 1fr;
   border-left: 1px dashed var(--grey-10);
   border-right: 1px dashed var(--grey-10);
   gap: 1rem;
+  display: none;
+
+  @media(min-width: 768px) {
+    display: grid;
+  }
 }
 
 .e-voucher-customer-info {
@@ -568,16 +613,42 @@ form {
 /* TABLES  */
 .confirm-booking-table {
   display: flex;
-  flex-direction: column;
-  margin: 2rem 0;
+  align-items: center;
+  padding: 1rem;
+  margin: 5rem 1rem;
+  border: 1px solid var(--secondary-100);
+  border-radius: 1rem;
 }
 
-.ticket-table table {
+.confirm-booking-table table tr {
+  background-color: var(--grey-10);
+  display: grid;
+  align-items: center;
+  padding: 1rem;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: .5rem;
+}
+
+table {
   width: 100%;
   border-collapse: collapse;
 }
-.ticket-table table tbody, .ticket-table table thead {
+table tbody, table thead {
   display: contents;
+}
+
+table tbody tr {
+  cursor: pointer;
+  transition: background-color .2s ease-in-out;
+
+  &:hover {
+    background-color: var(--primary-40);
+  }
+}
+
+table th {
+  width: 100%;
+  text-align: left;
 }
 
 .ticket-table table tr {
@@ -587,23 +658,9 @@ form {
   width: 100%;
   border-radius: 1rem;
   padding: 1rem;
-  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr;
+  grid-template-columns: 2fr 2fr 2fr 2fr 1fr 1fr;
   margin: .7rem 0;
-}
-
-.ticket-table table tbody tr {
-  cursor: pointer;
-  transition: background-color .2s ease-in-out;
-
-  &:hover {
-    background-color: var(--primary-40);
-  }
-}
-
-.ticket-table table th {
-  width: 100%;
-  padding: 0 1rem;
-  text-align: left;
+  gap: .5rem;
 }
 
 /* BUTTONS */

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from '../pages/Home'
 import Events from '../pages/Events'
 import Login from '../pages/auth/Login'
 import PortalLayout from '../layouts/PortalLayout'
@@ -19,8 +18,6 @@ import CompleteProfileInfo from '../pages/auth/CompleteProfileInfo'
 const Routing = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-        
       <Route element={<CenterLayout />}>
         <Route path='login' element={<Login />} />
         <Route path='register' element={<RegisterAccount />} />
@@ -31,15 +28,14 @@ const Routing = () => {
       </Route>
 
       <Route element={<PortalLayout />}>
+        <Route path="/" element={<Events />} />
         <Route path='/events' element={<Events />} />
         <Route path='/events/:id' element={<EventBooking />} />
         <Route path='/events/:id/book' element={<ConfirmBooking />} />
         <Route path='/bookingConfirmation' element={<BookingConfiormation />} />
         <Route path='/tickets' element={<Tickets />} />
-
         <Route path='/ticketDetails' element={<TicketDetails />} />
       </Route>
-
     </Routes>
   )
 }

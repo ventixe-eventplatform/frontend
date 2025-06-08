@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom'
 
 const EventCard = ({event}) => {
   return (
-    <Link to={`/events/${event.eventId}`}>
-      <div className='event-card'>
+    <Link to={`/events/${event.eventId}`} className='event-card'>
         <div className='event-image-container'>
-          <img></img>
+          <img src={event.eventImage}></img>
           <p>{event.eventType}</p>
         </div>
 
@@ -27,7 +26,6 @@ const EventCard = ({event}) => {
             <p>${Math.min(...event.packages.map(pkg => pkg.price))}</p>
           </div>
         </div>
-      </div>
     </Link>
   )
 }

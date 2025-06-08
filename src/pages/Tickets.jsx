@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { useUser } from '../contexts/UserContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Tickets = () => {
   const { user } = useUser()
   const navigate = useNavigate()
   const [bookings, setBookings] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [tokenExpired, setTokenExpired] = useState(false)
+
+  useEffect(() => {
+    const expiresAt = localStorage.getItem("expiresAt")
+    if (!expiresAt) {
+      setTokenExpired(true)
+      return
+    }
+    const expiryTime = new Date(expiresAt)
+    const isExpired = Date.now() > expiryTime.getTime()
+    setTokenExpired(isExpired)
+
+    if (!isExpired && user.userId) {
+      getBookings()
+    }
+  }, [location.pathname, user.userId])
 
   const getBookings = async () => {
     const customerId = user.userId
@@ -22,12 +39,10 @@ const Tickets = () => {
     }
     catch (error) {
       console.error("Error fetching data", error)
+    } finally {
+      setLoading(false)
     }
   }
-  
-  useEffect(() => {
-    getBookings()
-  }, [user.userId])
 
   const navigateToDetails = (ticket, booking) => {
     navigate("/ticketDetails", {
@@ -35,9 +50,14 @@ const Tickets = () => {
     })
   }
 
+  if (tokenExpired || !user?.userId) {
+    return <p>Sign in to see the tickets for your booked events.<Link to="/login"> Sign in here.</Link></p>
+  }
+
   return (
     <div> 
       <h3 className='pl-1 mb-1'>Your Tickets</h3>
+      {loading && <p className='pl-1'>Loading...</p>}
       <div className='ticket-table'>
         <table>
           <thead>
@@ -47,10 +67,9 @@ const Tickets = () => {
               <th>Event</th>
               <th>Ticket Category</th>
               <th>Price</th>
-              <th>E-Voucher</th>
+              <th>E-Voucher Code</th>
             </tr>
           </thead>
-
           <tbody>
           {
             bookings.map(booking => {
@@ -67,10 +86,8 @@ const Tickets = () => {
             })
           }
           </tbody>
-
         </table>
       </div>
-
     </div>
   )
 }
